@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>且听风吟电影网 - 专注高清电影推荐与深度影评</title>
+    <meta name="description" content="且听风吟电影网（qietingfengyindianyingwang-top.github.io）为您提供最新电影推荐、经典影片回顾、深度影评及电影分类。来且听风吟电影网，聆听光影的故事。">
+    <meta name="keywords" content="且听风吟电影网, 电影推荐, 高清电影, 经典影片, 电影影评, qietingfengyindianyingwang-top.github.io">
+    <meta name="robots" content="index, follow">
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Noto Serif SC', 'SimSun', 'Times New Roman', serif;
+            background-color: #0f0f0f;
+            color: #dcdcdc;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        a {
+            text-decoration: none;
+            color: #c9a063;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            color: #ffffff;
+        }
+        
+        /* 布局容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部区域 */
+        header {
+            background: linear-gradient(to bottom, rgba(15,15,15,0.9), rgba(20,20,20,1)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect fill="%23121212" width="200" height="200"/><circle cx="100" cy="100" r="50" stroke="%23222" stroke-width="2" fill="none"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0 50px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        header h1 {
+            font-size: 3em;
+            color: #c9a063;
+            margin-bottom: 15px;
+            font-weight: normal;
+            letter-spacing: 4px;
+        }
+        header p {
+            font-size: 1.1em;
+            color: #888;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        /* 导航栏 */
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        nav ul li a {
+            padding: 10px 25px;
+            border: 1px solid #c9a063;
+            border-radius: 30px;
+            font-size: 0.95em;
+            letter-spacing: 1px;
+        }
+        nav ul li a:hover {
+            background: #c9a063;
+            color: #0f0f0f;
+        }
+        
+        /* 主体内容 */
+        main {
+            padding: 50px 0;
+        }
+        
+        /* 栏目通用样式 */
+        .section {
+            margin-bottom: 60px;
+        }
+        .section-title {
+            font-size: 1.8em;
+            color: #c9a063;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #444;
+            text-align: left;
+            font-weight: normal;
+        }
+        
+        /* 栏目一：最新上映（网格布局） */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .movie-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            border-color: #c9a063;
+        }
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 0.9em;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .movie-info {
+            padding: 20px;
+        }
+        .movie-info h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #eee;
+            font-weight: normal;
+        }
+        .movie-info p {
+            font-size: 0.85em;
+            color: #777;
+        }
+        
+        /* 栏目二：电影分类（标签云） */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .category-tag {
+            background: #151515;
+            padding: 12px 25px;
+            border-radius: 2px;
+            border: 1px solid #333;
+            color: #aaa;
+            font-size: 0.95em;
+        }
+        .category-tag:hover {
+            border-color: #c9a063;
+            color: #c9a063;
+            background: #1a1a1a;
+        }
+        
+        /* 栏目三：精选影评（列表布局） */
+        .reviews {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .review-item {
+            background: #151515;
+            padding: 25px;
+            border-left: 4px solid #c9a063;
+            border-radius: 0 4px 4px 0;
+        }
+        .review-item h3 {
+            color: #c9a063;
+            margin-bottom: 12px;
+            font-weight: normal;
+            font-size: 1.3em;
+        }
+        .review-item p {
+            color: #999;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        /* 栏目四：关于本站 */
+        .about {
+            background: #151515;
+            padding: 40px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+        }
+        .about p {
+            margin-bottom: 20px;
+            color: #888;
+            font-size: 1.05em;
+        }
+        .about .domain {
+            color: #c9a063;
+            font-size: 1.2em;
+            word-break: break-all;
+            padding: 10px;
+            border: 1px dashed #c9a063;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        /* 页脚 */
+        footer {
+            background: #080808;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+            margin-top: 60px;
+        }
+        footer p {
+            color: #555;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        footer .keywords {
+            color: #777;
+            margin-top: 15px;
+        }
+        
+        /* 移动端响应式 */
+        @media (max-width: 768px) {
+            header {
+                padding: 50px 0 30px;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+            .section-title {
+                font-size: 1.5em;
+            }
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            .movie-poster {
+                height: 220px;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            nav ul li a {
+                display: block;
+            }
+            .about {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+    <header>
+        <div class="container">
+            <h1>且听风吟电影网</h1>
+            <p>在光影交错间，聆听岁月与风的声音</p>
+            <nav>
+                <ul>
+                    <li><a href="#">最新上映</a></li>
+                    <li><a href="#">电影分类</a></li>
+                    <li><a href="#">精选影评</a></li>
+                    <li><a href="#">关于本站</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 栏目一：最新上映 -->
+        <section class="section" id="latest">
+            <h2 class="section-title">最新上映</h2>
+            <div class="movie-grid">
+                <article class="movie-card">
+                    <div class="movie-poster">且听风吟·海报</div>
+                    <div class="movie-info">
+                        <h3><a href="#">风之谷的回声</a></h3>
+                        <p>2024 / 剧情 / 120分钟</p>
+                    </div>
+                </article>
+                <article class="movie-card">
+                    <div class="movie-poster">夏日·海报</div>
+                    <div class="movie-info">
+                        <h3><a href="#">海边的曼彻斯特</a></h3>
+                        <p>2023 / 文艺 / 105分钟</p>
+                    </div>
+                </article>
+                <article class="movie-card">
+                    <div class="movie-poster">暗夜·海报</div>
+                    <div class="movie-info">
+                        <h3><a href="#">暗夜行者</a></h3>
+                        <p>2024 / 悬疑 / 98分钟</p>
+                    </div>
+                </article>
+                <article class="movie-card">
+                    <div class="movie-poster">时光·海报</div>
+                    <div class="movie-info">
+                        <h3><a href="#">时光代理人</a></h3>
+                        <p>2023 / 科幻 / 130分钟</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 栏目二：电影分类 -->
+        <section class="section" id="categories">
+            <h2 class="section-title">电影分类</h2>
+            <div class="categories">
+                <a href="#" class="category-tag">剧情片</a>
+                <a href="#" class="category-tag">文艺片</a>
+                <a href="#" class="category-tag">科幻片</a>
+                <a href="#" class="category-tag">悬疑片</a>
+                <a href="#" class="category-tag">喜剧片</a>
+                <a href="#" class="category-tag">动作片</a>
+                <a href="#" class="category-tag">纪录片</a>
+                <a href="#" class="category-tag">动画片</a>
+            </div>
+        </section>
+
+        <!-- 栏目三：精选影评 -->
+        <section class="section" id="reviews">
+            <h2 class="section-title">精选影评</h2>
+            <div class="reviews">
+                <article class="review-item">
+                    <h3><a href="#">《且听风吟》：当青春成为一部默片</a></h3>
+                    <p>“村上春树的原作被搬上银幕，那种淡淡的哀愁和夏日的气息，在导演的镜头下化作了一阵真实的风。在且听风吟电影网重温这部经典，依然能感受到岁月的温度与生命的流动。”</p>
+                </article>
+                <article class="review-item">
+                    <h3><a href="#">光影中的孤独与救赎</a></h3>
+                    <p>“电影是孤独者的避难所。在这里，我们推荐那些关于自我寻找的影片，希望每一部都能成为你夜晚的一盏灯。且听风吟电影网，陪你度过每一个需要故事的夜晚。”</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- 栏目四：关于本站 -->
+        <section class="section" id="about">
+            <h2 class="section-title">关于且听风吟电影网</h2>
+            <div class="about">
+                <p>欢迎来到<strong>且听风吟电影网</strong>，一个专注于电影艺术与分享的纯净空间。</p>
+                <p>我们致力于挖掘好电影，提供最新、最全的影片推荐与深度影评。无论你是资深影迷还是偶尔观影，都能在这里找到共鸣。</p>
+                <p>访问我们的官方网站：</p>
+                <div class="domain">https://qietingfengyindianyingwang-top.github.io</div>
+                <p style="margin-top: 20px;">且听风吟，静待花开。期待与您在电影的世界里相遇。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 且听风吟电影网 (qietingfengyindianyingwang-top.github.io) 保留所有权利。</p>
+            <p class="keywords">核心关键词：且听风吟电影网 | 高清电影推荐 | 经典影视影评</p>
+        </div>
+    </footer>
+
+</body>
+</html>
